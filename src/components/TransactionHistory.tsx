@@ -116,7 +116,7 @@ export default function TransactionHistory({
               setSearch(e.target.value);
               setCurrentPage(1);
             }}
-            className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-white focus:border-blue-500 transition-colors"
+            className="w-full px-3 py-2 border border-slate-200 rounded-lg text-base sm:text-sm bg-white focus:border-blue-500 transition-colors"
           />
         </div>
 
@@ -125,7 +125,7 @@ export default function TransactionHistory({
           <select
             value={filterType}
             onChange={(e) => handleTypeFilterChange(e.target.value as any)}
-            className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-white text-slate-700 cursor-pointer"
+            className="w-full px-3 py-2 border border-slate-200 rounded-lg text-base sm:text-sm bg-white text-slate-700 cursor-pointer"
           >
             <option value="all">All Types</option>
             <option value="income">Income Only</option>
@@ -141,7 +141,7 @@ export default function TransactionHistory({
               setFilterCategory(e.target.value);
               setCurrentPage(1);
             }}
-            className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-white text-slate-700 cursor-pointer"
+            className="w-full px-3 py-2 border border-slate-200 rounded-lg text-base sm:text-sm bg-white text-slate-700 cursor-pointer"
           >
             <option value="all">All Categories</option>
             {Array.from(new Set(activeCategories)).map((cat) => (

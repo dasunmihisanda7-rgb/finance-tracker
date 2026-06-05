@@ -77,7 +77,7 @@ export default function AuthScreen() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] px-4 font-sans">
-      <div className="w-full max-w-md bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden p-6 sm:p-8 transition-all duration-300 hover:shadow-md">
+      <div className="w-full max-w-md bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden p-6 sm:p-8 transition-shadow duration-300 hover:shadow-md">
         {/* Logo Image */}
         <div className="flex flex-col items-center mb-6">
           <img 
@@ -143,7 +143,7 @@ export default function AuthScreen() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="name@example.com"
               required
-              className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-md focus:bg-white focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 transition-all font-medium"
+              className="w-full px-3.5 py-2 text-base sm:text-sm bg-slate-50 border border-slate-200 rounded-md focus:bg-white focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 transition-colors font-medium"
             />
           </div>
 
@@ -157,7 +157,7 @@ export default function AuthScreen() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
               required
-              className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-md focus:bg-white focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 transition-all font-medium"
+              className="w-full px-3.5 py-2 text-base sm:text-sm bg-slate-50 border border-slate-200 rounded-md focus:bg-white focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 transition-colors font-medium"
             />
           </div>
 

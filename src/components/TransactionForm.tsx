@@ -161,7 +161,7 @@ export default function TransactionForm({
               placeholder="0.00"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              className={`w-full pl-10 pr-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:ring-1 transition-colors ${
+              className={`w-full pl-10 pr-3 py-2 border rounded-lg text-base sm:text-sm bg-white focus:outline-none focus:ring-1 transition-colors ${
                 errors.amount
                   ? 'border-rose-300 focus:ring-rose-500 focus:border-rose-500'
                   : 'border-slate-200 focus:ring-slate-900 focus:border-slate-900'
@@ -178,12 +178,12 @@ export default function TransactionForm({
           <label htmlFor="date" className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
             Date
           </label>
-          <input
+           <input
             type="date"
             id="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className={`w-full px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:ring-1 transition-colors ${
+            className={`w-full px-3 py-2 border rounded-lg text-base sm:text-sm bg-white focus:outline-none focus:ring-1 transition-colors ${
               errors.date
                 ? 'border-rose-300 focus:ring-rose-500 focus:border-rose-500'
                 : 'border-slate-200 focus:ring-slate-900 focus:border-slate-900'
@@ -203,7 +203,7 @@ export default function TransactionForm({
             id="category"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className={`w-full px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:ring-1 transition-colors ${
+            className={`w-full px-3 py-2 border rounded-lg text-base sm:text-sm bg-white focus:outline-none focus:ring-1 transition-colors ${
               errors.category
                 ? 'border-rose-300 focus:ring-rose-500 focus:border-rose-500'
                 : 'border-slate-200 focus:ring-slate-900 focus:border-slate-900'
@@ -231,7 +231,7 @@ export default function TransactionForm({
             placeholder="e.g., Weekly Groceries, Monthly Salary"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className={`w-full px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:ring-1 transition-colors ${
+            className={`w-full px-3 py-2 border rounded-lg text-base sm:text-sm bg-white focus:outline-none focus:ring-1 transition-colors ${
               errors.description
                 ? 'border-rose-300 focus:ring-rose-500 focus:border-rose-500'
                 : 'border-slate-200 focus:ring-slate-900 focus:border-slate-900'
