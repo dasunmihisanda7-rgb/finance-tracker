@@ -78,13 +78,13 @@ export default function AuthScreen() {
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] px-4 font-sans">
       <div className="w-full max-w-md bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden p-6 sm:p-8 transition-all duration-300 hover:shadow-md">
-        {/* Abstract Logo */}
-        <div className="flex flex-col items-center mb-8">
-          <div className="w-12 h-12 bg-slate-900 flex items-center justify-center rounded-lg mb-3">
-            <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </div>
+        {/* Logo Image */}
+        <div className="flex flex-col items-center mb-6">
+          <img 
+            src="/logo.png" 
+            alt="FinanceTracker Logo" 
+            className="w-16 h-16 object-contain rounded-xl mb-2"
+          />
           <h2 className="text-xl font-bold text-slate-900">FinanceTracker</h2>
           <p className="text-xs text-slate-400 font-medium tracking-wide uppercase mt-1">Manage your wealth simply</p>
         </div>
