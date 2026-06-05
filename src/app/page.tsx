@@ -191,7 +191,7 @@ export default function Home() {
             <img 
               src="/logo.png" 
               alt="FinanceTracker Logo" 
-              className="w-8 h-8 object-contain rounded"
+              className="w-10 h-10 object-contain rounded"
             />
             <div>
               <h1 className="text-lg font-bold text-slate-900 leading-tight">FinanceTracker</h1>
