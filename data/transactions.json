@@ -1,0 +1,34 @@
+[
+  {
+    "id": "mock-1",
+    "type": "income",
+    "category": "Salary",
+    "amount": 150000,
+    "date": "2026-06-01",
+    "description": "Monthly Corporate Salary"
+  },
+  {
+    "id": "mock-2",
+    "type": "expense",
+    "category": "Rent & Utilities",
+    "amount": 45000,
+    "date": "2026-06-02",
+    "description": "Apartment Rent Payment"
+  },
+  {
+    "id": "mock-3",
+    "type": "expense",
+    "category": "Food & Dining",
+    "amount": 3200.5,
+    "date": "2026-06-03",
+    "description": "Dinner with colleagues"
+  },
+  {
+    "id": "mock-4",
+    "type": "income",
+    "category": "Freelance",
+    "amount": 35000,
+    "date": "2026-06-04",
+    "description": "UI/UX Design Consulting Contract"
+  }
+]
