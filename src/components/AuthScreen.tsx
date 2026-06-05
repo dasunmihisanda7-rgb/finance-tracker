@@ -78,13 +78,25 @@ export default function AuthScreen() {
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] px-4 font-sans">
       <div className="w-full max-w-md bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden p-6 sm:p-8 transition-shadow duration-300 hover:shadow-md">
-        {/* Logo Image */}
+        {/* Custom SVG Logo */}
         <div className="flex flex-col items-center mb-6">
-          <img 
-            src="/logo.png" 
-            alt="FinanceTracker Logo" 
-            className="w-16 h-16 object-contain rounded-xl mb-2"
-          />
+          <svg 
+            className="h-16 w-16 mb-2" 
+            viewBox="0 0 40 40" 
+            fill="none" 
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <linearGradient id="auth-logo-gradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#0f172a" />
+                <stop offset="100%" stopColor="#10b981" />
+              </linearGradient>
+            </defs>
+            <rect x="6" y="24" width="6" height="10" rx="1.5" fill="url(#auth-logo-gradient)" />
+            <rect x="16" y="14" width="6" height="20" rx="1.5" fill="url(#auth-logo-gradient)" />
+            <rect x="26" y="6" width="6" height="28" rx="1.5" fill="url(#auth-logo-gradient)" />
+            <path d="M4 34H36" stroke="url(#auth-logo-gradient)" strokeWidth="2.5" strokeLinecap="round" />
+          </svg>
           <h2 className="text-xl font-bold text-slate-900">FinanceTracker</h2>
           <p className="text-xs text-slate-400 font-medium tracking-wide uppercase mt-1">Manage your wealth simply</p>
         </div>

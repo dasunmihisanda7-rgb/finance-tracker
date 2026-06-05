@@ -187,12 +187,24 @@ export default function Home() {
       <header className="bg-white border-b border-slate-200">
         <div className="max-w-6xl mx-auto px-4 py-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            {/* Logo Image */}
-            <img 
-              src="/logo.png" 
-              alt="FinanceTracker Logo" 
-              className="h-12 w-auto object-contain rounded"
-            />
+            {/* Custom SVG Logo */}
+            <svg 
+              className="h-10 w-10 shrink-0" 
+              viewBox="0 0 40 40" 
+              fill="none" 
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <linearGradient id="logo-gradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#0f172a" />
+                  <stop offset="100%" stopColor="#10b981" />
+                </linearGradient>
+              </defs>
+              <rect x="6" y="24" width="6" height="10" rx="1.5" fill="url(#logo-gradient)" />
+              <rect x="16" y="14" width="6" height="20" rx="1.5" fill="url(#logo-gradient)" />
+              <rect x="26" y="6" width="6" height="28" rx="1.5" fill="url(#logo-gradient)" />
+              <path d="M4 34H36" stroke="url(#logo-gradient)" strokeWidth="2.5" strokeLinecap="round" />
+            </svg>
             <div>
               <h1 className="text-lg font-bold text-slate-900 leading-tight">FinanceTracker</h1>
               <p className="text-[10px] text-slate-400 font-medium tracking-wide uppercase">Minimalist Finance Manager</p>
