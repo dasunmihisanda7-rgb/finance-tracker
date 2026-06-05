@@ -77,7 +77,7 @@ export default function AuthScreen() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] px-4 font-sans">
-      <div className="w-full max-w-md bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden p-8 transition-all duration-300 hover:shadow-md">
+      <div className="w-full max-w-md bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden p-6 sm:p-8 transition-all duration-300 hover:shadow-md">
         {/* Abstract Logo */}
         <div className="flex flex-col items-center mb-8">
           <div className="w-12 h-12 bg-slate-900 flex items-center justify-center rounded-lg mb-3">

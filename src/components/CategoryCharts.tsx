@@ -79,21 +79,21 @@ export default function CategoryCharts({ transactions }: CategoryChartsProps) {
     const hasData = data.length > 0;
 
     return (
-      <div className="bg-white border border-slate-200 p-6 rounded-lg flex flex-col justify-between h-[360px]">
+      <div className="bg-white border border-slate-200 p-6 rounded-lg flex flex-col justify-between h-auto sm:h-[360px]">
         <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">{title}</h3>
         
         {hasData ? (
-          <div className="grid grid-cols-1 sm:grid-cols-5 gap-4 items-center flex-grow h-[260px]">
+          <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 sm:gap-4 items-center flex-grow h-auto sm:h-[260px]">
             {/* Chart Graphic Area */}
-            <div className="sm:col-span-3 h-full relative min-h-[200px]">
+            <div className="sm:col-span-3 h-[200px] sm:h-full relative min-h-[200px]">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
                     data={data}
                     cx="50%"
                     cy="50%"
-                    innerRadius={55}
-                    outerRadius={80}
+                    innerRadius={50}
+                    outerRadius={75}
                     paddingAngle={3}
                     dataKey="value"
                   >
@@ -117,7 +117,7 @@ export default function CategoryCharts({ transactions }: CategoryChartsProps) {
             </div>
             
             {/* Text Legend Area */}
-            <div className="sm:col-span-2 overflow-y-auto max-h-[240px] pr-1 space-y-2.5">
+            <div className="sm:col-span-2 overflow-y-auto max-h-[180px] sm:max-h-[240px] pr-1 space-y-2.5">
               {data.map((item) => (
                 <div key={item.name} className="flex items-start justify-between text-xs">
                   <div className="flex items-center gap-2">
@@ -125,7 +125,7 @@ export default function CategoryCharts({ transactions }: CategoryChartsProps) {
                       className="w-2.5 h-2.5 rounded-full shrink-0" 
                       style={{ backgroundColor: item.color }} 
                     />
-                    <span className="font-medium text-slate-700 truncate max-w-[90px]">{item.name}</span>
+                    <span className="font-medium text-slate-700 truncate max-w-[120px] sm:max-w-[90px]">{item.name}</span>
                   </div>
                   <div className="text-right shrink-0">
                     <span className="font-semibold text-slate-900">{item.percentage.toFixed(0)}%</span>
@@ -136,7 +136,7 @@ export default function CategoryCharts({ transactions }: CategoryChartsProps) {
             </div>
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center flex-grow text-slate-400 text-xs">
+          <div className="flex flex-col items-center justify-center flex-grow py-12 text-slate-400 text-xs">
             <svg className="w-8 h-8 text-slate-300 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
               <path strokeLinecap="round" strokeLinejoin="round" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />

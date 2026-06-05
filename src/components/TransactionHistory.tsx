@@ -153,8 +153,69 @@ export default function TransactionHistory({
         </div>
       </div>
 
-      {/* Transactions Data Table */}
-      <div className="overflow-x-auto">
+      {/* Mobile List View (rendered on smaller screens) */}
+      <div className="block sm:hidden space-y-3">
+        {paginatedTransactions.length > 0 ? (
+          paginatedTransactions.map((t) => (
+            <div 
+              key={t.id} 
+              className={`p-4 border border-slate-200 rounded-lg flex flex-col gap-3 transition-colors ${
+                editingTransactionId === t.id ? 'bg-blue-50/30 border-blue-300' : 'bg-slate-50/50'
+              }`}
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div className="min-w-0">
+                  <h4 className="font-semibold text-slate-900 text-sm truncate">{t.description}</h4>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="text-[10px] text-slate-500">{formatDate(t.date)}</span>
+                    <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-700 border border-slate-200">
+                      {t.category}
+                    </span>
+                  </div>
+                </div>
+                <span className={`text-sm font-bold whitespace-nowrap text-right shrink-0 ${
+                  t.type === 'income' ? 'text-emerald-600' : 'text-rose-600'
+                }`}>
+                  {t.type === 'income' ? '+' : '-'}{formatCurrency(t.amount).replace(/^-/, '')}
+                </span>
+              </div>
+              
+              <div className="flex justify-end gap-4 border-t border-slate-200/50 pt-2">
+                <button
+                  onClick={() => onEditTransaction(t)}
+                  className={`text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors cursor-pointer ${
+                    editingTransactionId === t.id ? 'underline' : ''
+                  }`}
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => {
+                    if (confirm('Are you sure you want to delete this transaction?')) {
+                      onDeleteTransaction(t.id);
+                    }
+                  }}
+                  className="text-xs font-semibold text-rose-600 hover:text-rose-800 transition-colors cursor-pointer"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className="py-8 text-center text-slate-400 text-xs">
+            <div className="flex flex-col items-center justify-center gap-2">
+              <svg className="w-8 h-8 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+              <span>No transactions found.</span>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Desktop Tabular View (rendered on screens >= 640px) */}
+      <div className="hidden sm:block overflow-x-auto">
         <table className="w-full border-collapse text-left text-sm text-slate-700">
           <thead>
             <tr className="border-b border-slate-200 bg-slate-50 text-slate-500 text-xs font-semibold uppercase tracking-wider">

@@ -11,7 +11,7 @@ export default function DashboardStats({ totalIncome, totalExpenses }: Dashboard
   const isPositive = netBalance >= 0;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
       {/* Net Balance Card */}
       <div className="bg-white border border-slate-200 p-6 rounded-lg flex flex-col justify-between">
         <div>
