@@ -16,6 +16,12 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "FinanceTracker - Clean Income & Expense Tracker",
   description: "A minimalist personal finance application to log and track your income, expenses, net balance, and transaction history.",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "FinanceTracker",
+  },
 };
 
 export default function RootLayout({
