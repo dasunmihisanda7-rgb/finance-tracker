@@ -80,9 +80,10 @@ export default function Home() {
           revalidate: false,
         }
       );
-    } catch (err: any) {
+    } catch (err) {
       console.error('Error adding transaction:', err);
-      alert(`Failed to add transaction: ${err.message || 'Server error'}`);
+      const message = err instanceof Error ? err.message : 'Server error';
+      alert(`Failed to add transaction: ${message}`);
     }
   };
 
@@ -108,9 +109,10 @@ export default function Home() {
       if (editingTransaction?.id === id) {
         setEditingTransaction(null);
       }
-    } catch (err: any) {
+    } catch (err) {
       console.error('Error deleting transaction:', err);
-      alert(`Failed to delete transaction: ${err.message || 'Server error'}`);
+      const message = err instanceof Error ? err.message : 'Server error';
+      alert(`Failed to delete transaction: ${message}`);
     }
   };
 
@@ -147,9 +149,10 @@ export default function Home() {
         }
       );
       setEditingTransaction(null);
-    } catch (err: any) {
+    } catch (err) {
       console.error('Error updating transaction:', err);
-      alert(`Failed to update transaction: ${err.message || 'Server error'}`);
+      const message = err instanceof Error ? err.message : 'Server error';
+      alert(`Failed to update transaction: ${message}`);
     }
   };
 
@@ -240,6 +243,7 @@ export default function Home() {
               {/* Form container */}
               <div id="transaction-form-container" className="lg:col-span-1">
                 <TransactionForm
+                  key={editingTransaction ? editingTransaction.id : 'new'}
                   onAddTransaction={handleAddTransaction}
                   editingTransaction={editingTransaction}
                   onUpdateTransaction={handleUpdateTransaction}

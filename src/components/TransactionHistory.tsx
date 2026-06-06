@@ -93,7 +93,7 @@ export default function TransactionHistory({
           <select
             id="sortBy"
             value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as any)}
+            onChange={(e) => setSortBy(e.target.value as 'date-desc' | 'date-asc' | 'amount-desc' | 'amount-asc')}
             className="px-2 py-1.5 border border-slate-200 rounded-md text-xs bg-white text-slate-700 cursor-pointer"
           >
             <option value="date-desc">Newest First</option>
@@ -124,7 +124,7 @@ export default function TransactionHistory({
         <div>
           <select
             value={filterType}
-            onChange={(e) => handleTypeFilterChange(e.target.value as any)}
+            onChange={(e) => handleTypeFilterChange(e.target.value as 'all' | 'income' | 'expense')}
             className="w-full px-3 py-2 border border-slate-200 rounded-lg text-base sm:text-sm bg-white text-slate-700 cursor-pointer"
           >
             <option value="all">All Types</option>

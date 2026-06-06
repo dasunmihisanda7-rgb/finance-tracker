@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Transaction, INCOME_CATEGORIES, EXPENSE_CATEGORIES, TransactionType } from '../types';
 import { TransactionSchema } from '../lib/validations';
 
@@ -15,51 +15,29 @@ export default function TransactionForm({
   onUpdateTransaction,
   onCancelEdit,
 }: TransactionFormProps) {
-  const [type, setType] = useState<TransactionType>('expense');
-  const [date, setDate] = useState<string>('');
-  const [category, setCategory] = useState<string>('');
-  const [amount, setAmount] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
+  const [type, setType] = useState<TransactionType>(editingTransaction?.type || 'expense');
+  const [date, setDate] = useState<string>(() => {
+    if (editingTransaction) return editingTransaction.date;
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+  });
+  const [category, setCategory] = useState<string>(
+    editingTransaction?.category || (editingTransaction?.type === 'income' ? INCOME_CATEGORIES[0] : EXPENSE_CATEGORIES[0])
+  );
+  const [amount, setAmount] = useState<string>(editingTransaction ? String(editingTransaction.amount) : '');
+  const [description, setDescription] = useState<string>(editingTransaction?.description || '');
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  // Set default date to today's date in local time YYYY-MM-DD
-  useEffect(() => {
-    if (!editingTransaction) {
-      const today = new Date();
-      const yyyy = today.getFullYear();
-      const mm = String(today.getMonth() + 1).padStart(2, '0');
-      const dd = String(today.getDate()).padStart(2, '0');
-      setDate(`${yyyy}-${mm}-${dd}`);
+  const handleTypeChange = (newType: TransactionType) => {
+    setType(newType);
+    const newCategories = newType === 'income' ? INCOME_CATEGORIES : EXPENSE_CATEGORIES;
+    if (!newCategories.some(c => c === category)) {
+      setCategory(newCategories[0]);
     }
-  }, [editingTransaction]);
-
-  // Load transaction when editing
-  useEffect(() => {
-    if (editingTransaction) {
-      setType(editingTransaction.type);
-      setDate(editingTransaction.date);
-      setCategory(editingTransaction.category);
-      setAmount(String(editingTransaction.amount));
-      setDescription(editingTransaction.description);
-      setErrors({});
-    } else {
-      // Reset after edit cancelled or completed
-      setType('expense');
-      setCategory('');
-      setAmount('');
-      setDescription('');
-      setErrors({});
-    }
-  }, [editingTransaction]);
-
-  // Sync category list when type changes
-  useEffect(() => {
-    const categories = type === 'income' ? INCOME_CATEGORIES : EXPENSE_CATEGORIES;
-    // Only set default if currently selected category is not in the new type's categories list
-    if (!categories.includes(category as any)) {
-      setCategory(categories[0]);
-    }
-  }, [type, category]);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -119,7 +97,7 @@ export default function TransactionForm({
           <div className="grid grid-cols-2 gap-2 p-1 bg-slate-50 border border-slate-200 rounded-lg">
             <button
               type="button"
-              onClick={() => setType('expense')}
+              onClick={() => handleTypeChange('expense')}
               className={`py-2 text-sm font-medium rounded-md transition-colors cursor-pointer ${
                 type === 'expense'
                   ? 'bg-rose-600 text-white shadow-sm'
@@ -130,7 +108,7 @@ export default function TransactionForm({
             </button>
             <button
               type="button"
-              onClick={() => setType('income')}
+              onClick={() => handleTypeChange('income')}
               className={`py-2 text-sm font-medium rounded-md transition-colors cursor-pointer ${
                 type === 'income'
                   ? 'bg-emerald-600 text-white shadow-sm'
@@ -182,6 +160,7 @@ export default function TransactionForm({
             type="date"
             id="date"
             value={date}
+            suppressHydrationWarning={true}
             onChange={(e) => setDate(e.target.value)}
             className={`w-full px-3 py-2 border rounded-lg text-base sm:text-sm bg-white focus:outline-none focus:ring-1 transition-colors ${
               errors.date

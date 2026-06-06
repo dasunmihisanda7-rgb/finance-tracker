@@ -9,23 +9,23 @@ interface CategoryChartsProps {
   transactions: Transaction[];
 }
 
-const INCOME_COLORS: Record<string, string> = {
-  Salary: '#10b981',      // Emerald 500
-  Freelance: '#14b8a6',   // Teal 500
-  Investments: '#3b82f6', // Blue 500
-  Gifts: '#8b5cf6',       // Violet 500
-  Other: '#94a3b8',       // Slate 400
+const INCOME_COLORS: Record<string, [string, string]> = {
+  Salary: ['#34d399', '#059669'],      // Emerald 400 -> Emerald 600
+  Freelance: ['#2dd4bf', '#0d9488'],   // Teal 400 -> Teal 600
+  Investments: ['#60a5fa', '#2563eb'], // Blue 400 -> Blue 600
+  Gifts: ['#a78bfa', '#7c3aed'],       // Violet 400 -> Violet 600
+  Other: ['#94a3b8', '#475569'],       // Slate 400 -> Slate 600
 };
 
-const EXPENSE_COLORS: Record<string, string> = {
-  'Food & Dining': '#f43f5e',   // Rose 500
-  'Rent & Utilities': '#f59e0b', // Amber 500
-  Transport: '#0ea5e9',          // Sky 500
-  Shopping: '#6366f1',           // Indigo 500
-  Entertainment: '#8b5cf6',      // Violet 500
-  Groceries: '#14b8a6',          // Teal 500
-  Healthcare: '#10b981',         // Emerald 500
-  Other: '#94a3b8',              // Slate 400
+const EXPENSE_COLORS: Record<string, [string, string]> = {
+  'Food & Dining': ['#fb7185', '#e11d48'],   // Rose 400 -> Rose 600
+  'Rent & Utilities': ['#fbbf24', '#d97706'], // Amber 400 -> Amber 600
+  Transport: ['#38bdf8', '#0284c7'],          // Sky 400 -> Sky 600
+  Shopping: ['#818cf8', '#4f46e5'],           // Indigo 400 -> Indigo 600
+  Entertainment: ['#a78bfa', '#7c3aed'],      // Violet 400 -> Violet 600
+  Groceries: ['#2dd4bf', '#0d9488'],          // Teal 400 -> Teal 600
+  Healthcare: ['#34d399', '#059669'],         // Emerald 400 -> Emerald 600
+  Other: ['#94a3b8', '#475569'],              // Slate 400 -> Slate 600
 };
 
 export default function CategoryCharts({ transactions }: CategoryChartsProps) {
@@ -46,7 +46,7 @@ export default function CategoryCharts({ transactions }: CategoryChartsProps) {
       name,
       value,
       percentage: total > 0 ? (value / total) * 100 : 0,
-      color: INCOME_COLORS[name] || '#64748b',
+      colors: INCOME_COLORS[name] || ['#94a3b8', '#475569'],
     })).sort((a, b) => b.value - a.value);
   }, [transactions]);
 
@@ -67,14 +67,15 @@ export default function CategoryCharts({ transactions }: CategoryChartsProps) {
       name,
       value,
       percentage: total > 0 ? (value / total) * 100 : 0,
-      color: EXPENSE_COLORS[name] || '#64748b',
+      colors: EXPENSE_COLORS[name] || ['#94a3b8', '#475569'],
     })).sort((a, b) => b.value - a.value);
   }, [transactions]);
 
   const renderChartCard = (
     title: string,
-    data: Array<{ name: string; value: number; percentage: number; color: string }>,
-    emptyMessage: string
+    data: Array<{ name: string; value: number; percentage: number; colors: [string, string] }>,
+    emptyMessage: string,
+    gradientIdPrefix: string
   ) => {
     const hasData = data.length > 0;
 
@@ -88,6 +89,14 @@ export default function CategoryCharts({ transactions }: CategoryChartsProps) {
             <div className="sm:col-span-3 h-[200px] sm:h-full relative min-h-[200px]">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
+                  <defs>
+                    {data.map((entry, index) => (
+                      <linearGradient key={`grad-${index}`} id={`${gradientIdPrefix}-${index}`} x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stopColor={entry.colors[0]} stopOpacity={1}/>
+                        <stop offset="100%" stopColor={entry.colors[1]} stopOpacity={1}/>
+                      </linearGradient>
+                    ))}
+                  </defs>
                   <Pie
                     data={data}
                     cx="50%"
@@ -98,10 +107,11 @@ export default function CategoryCharts({ transactions }: CategoryChartsProps) {
                     dataKey="value"
                   >
                     {data.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} stroke="#ffffff" strokeWidth={2} />
+                      <Cell key={`cell-${index}`} fill={`url(#${gradientIdPrefix}-${index})`} stroke="#ffffff" strokeWidth={2} />
                     ))}
                   </Pie>
                   <Tooltip
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     formatter={(value: any) => [formatCurrency(Number(value) || 0), 'Amount']}
                     contentStyle={{
                       backgroundColor: '#ffffff',
@@ -121,9 +131,9 @@ export default function CategoryCharts({ transactions }: CategoryChartsProps) {
               {data.map((item) => (
                 <div key={item.name} className="flex items-start justify-between text-xs">
                   <div className="flex items-center gap-2">
-                    <span 
+                    <div 
                       className="w-2.5 h-2.5 rounded-full shrink-0" 
-                      style={{ backgroundColor: item.color }} 
+                      style={{ background: `linear-gradient(135deg, ${item.colors[0]} 0%, ${item.colors[1]} 100%)` }} 
                     />
                     <span className="font-medium text-slate-700 truncate max-w-[120px] sm:max-w-[90px]">{item.name}</span>
                   </div>
@@ -150,8 +160,9 @@ export default function CategoryCharts({ transactions }: CategoryChartsProps) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-      {renderChartCard('Income Distribution', incomeData, 'No income data registered yet.')}
-      {renderChartCard('Expense Distribution', expenseData, 'No expense data registered yet.')}
+      {renderChartCard('Income Distribution', incomeData, 'No income data registered yet.', 'income-grad')}
+      {renderChartCard('Expense Distribution', expenseData, 'No expense data registered yet.', 'expense-grad')}
     </div>
   );
 }
+

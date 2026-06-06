@@ -68,8 +68,8 @@ export default function AuthScreen() {
           setError(result.error || "Invalid credentials. Please try again.");
         }
       }
-    } catch (err: any) {
-      setError(err.message || "An error occurred.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An error occurred.");
     } finally {
       setIsLoading(false);
     }

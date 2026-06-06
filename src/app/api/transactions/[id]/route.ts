@@ -13,7 +13,7 @@ export async function PUT(
     if (!session || !session.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-    const userId = (session.user as any).id;
+    const userId = session.user.id;
 
     const { id } = await params;
     const body = await request.json();
@@ -39,10 +39,11 @@ export async function PUT(
     }, userId);
 
     return NextResponse.json(updatedTx);
-  } catch (error: any) {
+  } catch (error) {
     console.error(`API PUT /api/transactions/[id] failed for ID:`, error);
-    if (error.message && error.message.includes('not found')) {
-      return NextResponse.json({ error: error.message }, { status: 404 });
+    const message = error instanceof Error ? error.message : '';
+    if (message && message.includes('not found')) {
+      return NextResponse.json({ error: message }, { status: 404 });
     }
     return NextResponse.json({ error: 'Failed to update transaction' }, { status: 500 });
   }
@@ -57,7 +58,7 @@ export async function DELETE(
     if (!session || !session.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-    const userId = (session.user as any).id;
+    const userId = session.user.id;
 
     const { id } = await params;
     const success = await db.delete(id, userId);
