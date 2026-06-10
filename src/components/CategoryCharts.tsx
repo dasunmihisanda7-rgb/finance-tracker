@@ -80,7 +80,7 @@ export default function CategoryCharts({ transactions }: CategoryChartsProps) {
     const hasData = data.length > 0;
 
     return (
-      <div className="bg-white border border-slate-200 p-6 rounded-lg flex flex-col justify-between h-auto sm:h-[360px]">
+      <div className="bg-card border border-border p-6 rounded-lg flex flex-col justify-between h-auto sm:h-[360px] hover:border-emerald-500/20 transition-colors duration-300">
         <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">{title}</h3>
         
         {hasData ? (
@@ -107,20 +107,23 @@ export default function CategoryCharts({ transactions }: CategoryChartsProps) {
                     dataKey="value"
                   >
                     {data.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={`url(#${gradientIdPrefix}-${index})`} stroke="#ffffff" strokeWidth={2} />
+                      <Cell key={`cell-${index}`} fill={`url(#${gradientIdPrefix}-${index})`} stroke="#111827" strokeWidth={2} />
                     ))}
                   </Pie>
                   <Tooltip
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     formatter={(value: any) => [formatCurrency(Number(value) || 0), 'Amount']}
                     contentStyle={{
-                      backgroundColor: '#ffffff',
-                      border: '1px solid #e2e8f0',
-                      borderRadius: '0.375rem',
-                      boxShadow: 'none',
+                      backgroundColor: '#1e293b',
+                      border: '1px solid #334155',
+                      borderRadius: '0.5rem',
+                      boxShadow: '0 10px 25px rgba(0, 0, 0, 0.4)',
                       fontSize: '0.75rem',
                       fontFamily: 'var(--font-geist-sans), sans-serif',
+                      color: '#e2e8f0',
                     }}
+                    itemStyle={{ color: '#e2e8f0' }}
+                    labelStyle={{ color: '#94a3b8' }}
                   />
                 </PieChart>
               </ResponsiveContainer>
@@ -135,19 +138,19 @@ export default function CategoryCharts({ transactions }: CategoryChartsProps) {
                       className="w-2.5 h-2.5 rounded-full shrink-0" 
                       style={{ background: `linear-gradient(135deg, ${item.colors[0]} 0%, ${item.colors[1]} 100%)` }} 
                     />
-                    <span className="font-medium text-slate-700 truncate max-w-[120px] sm:max-w-[90px]">{item.name}</span>
+                    <span className="font-medium text-slate-400 truncate max-w-[120px] sm:max-w-[90px]">{item.name}</span>
                   </div>
                   <div className="text-right shrink-0">
-                    <span className="font-semibold text-slate-900">{item.percentage.toFixed(0)}%</span>
-                    <p className="text-[10px] text-slate-400">{formatCurrency(item.value)}</p>
+                    <span className="font-semibold text-slate-200">{item.percentage.toFixed(0)}%</span>
+                    <p className="text-[10px] text-slate-500">{formatCurrency(item.value)}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center flex-grow py-12 text-slate-400 text-xs">
-            <svg className="w-8 h-8 text-slate-300 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <div className="flex flex-col items-center justify-center flex-grow py-12 text-slate-500 text-xs">
+            <svg className="w-8 h-8 text-slate-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
               <path strokeLinecap="round" strokeLinejoin="round" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
             </svg>
@@ -165,4 +168,3 @@ export default function CategoryCharts({ transactions }: CategoryChartsProps) {
     </div>
   );
 }
-

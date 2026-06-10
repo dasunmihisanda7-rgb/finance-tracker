@@ -162,13 +162,13 @@ export default function Home() {
 
   if (status === 'loading') {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-slate-50 font-sans">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-background font-sans">
         <div className="flex flex-col items-center">
-          <svg className="animate-spin h-8 w-8 text-slate-900 mb-4" fill="none" viewBox="0 0 24 24">
+          <svg className="animate-spin h-8 w-8 text-emerald-400 mb-4" fill="none" viewBox="0 0 24 24">
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
           </svg>
-          <div className="text-sm font-semibold text-slate-500">
+          <div className="text-sm font-semibold text-slate-400">
             Verifying session...
           </div>
         </div>
@@ -178,16 +178,16 @@ export default function Home() {
 
   if (status === 'unauthenticated') {
     return (
-      <div className="flex flex-col flex-grow min-h-screen bg-slate-50 justify-center">
+      <div className="flex flex-col flex-grow min-h-screen bg-background justify-center">
         <AuthScreen />
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col flex-grow min-h-screen bg-slate-50">
-      {/* Top clean header */}
-      <header className="bg-white border-b border-slate-200">
+    <div className="flex flex-col flex-grow min-h-screen bg-background">
+      {/* Top header with glassmorphism */}
+      <header className="bg-card/80 backdrop-blur-xl border-b border-border sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
             {/* Custom SVG Logo */}
@@ -199,8 +199,8 @@ export default function Home() {
             >
               <defs>
                 <linearGradient id="logo-gradient" x1="0%" y1="100%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#0f172a" />
-                  <stop offset="100%" stopColor="#10b981" />
+                  <stop offset="0%" stopColor="#059669" />
+                  <stop offset="100%" stopColor="#34d399" />
                 </linearGradient>
               </defs>
               <rect x="6" y="24" width="6" height="10" rx="1.5" fill="url(#logo-gradient)" />
@@ -209,18 +209,18 @@ export default function Home() {
               <path d="M4 34H36" stroke="url(#logo-gradient)" strokeWidth="2.5" strokeLinecap="round" />
             </svg>
             <div>
-              <h1 className="text-lg font-bold text-slate-900 leading-tight">FinanceTracker</h1>
-              <p className="text-[10px] text-slate-400 font-medium tracking-wide uppercase">Minimalist Finance Manager</p>
+              <h1 className="text-lg font-bold text-slate-100 leading-tight">FinanceTracker</h1>
+              <p className="text-[10px] text-slate-500 font-medium tracking-wide uppercase">Minimalist Finance Manager</p>
             </div>
           </div>
           <div className="flex items-center gap-4">
             <div className="text-right hidden sm:block">
-              <p className="text-xs font-semibold text-slate-900">{session?.user?.email}</p>
-              <p className="text-[10px] font-medium text-slate-400">Signed In</p>
+              <p className="text-xs font-semibold text-slate-300">{session?.user?.email}</p>
+              <p className="text-[10px] font-medium text-emerald-400/70">Signed In</p>
             </div>
             <button
               onClick={() => signOut()}
-              className="text-xs font-semibold px-3 py-1.5 border border-slate-200 rounded-md hover:bg-slate-50 transition-all text-slate-700 cursor-pointer shadow-sm active:scale-95 bg-white"
+              className="text-xs font-semibold px-3 py-1.5 border border-border rounded-md hover:bg-surface-elevated transition-all text-slate-300 cursor-pointer shadow-sm active:scale-95 bg-card"
             >
               Sign Out
             </button>
@@ -263,17 +263,17 @@ export default function Home() {
             </div>
           </>
         ) : (
-          /* Elegant flat loading state */
+          /* Elegant dark loading state */
           <div className="py-24 text-center">
-            <div className="inline-block animate-pulse text-sm font-semibold text-slate-400">
+            <div className="inline-block animate-pulse text-sm font-semibold text-slate-500">
               Loading financial database...
             </div>
           </div>
         )}
       </main>
 
-      {/* Flat minimalist footer */}
-      <footer className="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-400 font-medium mt-auto">
+      {/* Dark minimalist footer */}
+      <footer className="bg-card/50 backdrop-blur-sm border-t border-border py-6 text-center text-xs text-slate-500 font-medium mt-auto">
         <div className="max-w-6xl mx-auto px-4">
           &copy; {new Date().getFullYear()} FinanceTracker. Flat UI Edition. Formatted in Rs. (Millions).
         </div>

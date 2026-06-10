@@ -77,7 +77,7 @@ export default function AuthScreen() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] px-4 font-sans">
-      <div className="w-full max-w-md bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden p-6 sm:p-8 transition-shadow duration-300 hover:shadow-md">
+      <div className="w-full max-w-md bg-card border border-border rounded-xl shadow-2xl shadow-black/20 overflow-hidden p-6 sm:p-8 transition-shadow duration-300 hover:shadow-emerald-500/5">
         {/* Custom SVG Logo */}
         <div className="flex flex-col items-center mb-6">
           <svg 
@@ -88,8 +88,8 @@ export default function AuthScreen() {
           >
             <defs>
               <linearGradient id="auth-logo-gradient" x1="0%" y1="100%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#0f172a" />
-                <stop offset="100%" stopColor="#10b981" />
+                <stop offset="0%" stopColor="#059669" />
+                <stop offset="100%" stopColor="#34d399" />
               </linearGradient>
             </defs>
             <rect x="6" y="24" width="6" height="10" rx="1.5" fill="url(#auth-logo-gradient)" />
@@ -97,16 +97,16 @@ export default function AuthScreen() {
             <rect x="26" y="6" width="6" height="28" rx="1.5" fill="url(#auth-logo-gradient)" />
             <path d="M4 34H36" stroke="url(#auth-logo-gradient)" strokeWidth="2.5" strokeLinecap="round" />
           </svg>
-          <h2 className="text-xl font-bold text-slate-900">FinanceTracker</h2>
-          <p className="text-xs text-slate-400 font-medium tracking-wide uppercase mt-1">Manage your wealth simply</p>
+          <h2 className="text-xl font-bold text-slate-100">FinanceTracker</h2>
+          <p className="text-xs text-slate-500 font-medium tracking-wide uppercase mt-1">Manage your wealth simply</p>
         </div>
 
         {/* Tab Selection */}
-        <div className="flex bg-slate-100 p-1 rounded-lg mb-6">
+        <div className="flex bg-surface p-1 rounded-lg mb-6 border border-border">
           <button
             type="button"
             className={`flex-1 py-2 text-xs font-semibold rounded-md transition-all duration-200 ${
-              !isSignUp ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-950"
+              !isSignUp ? "bg-surface-elevated text-slate-100 shadow-sm" : "text-slate-500 hover:text-slate-300"
             }`}
             onClick={() => {
               setIsSignUp(false);
@@ -119,7 +119,7 @@ export default function AuthScreen() {
           <button
             type="button"
             className={`flex-1 py-2 text-xs font-semibold rounded-md transition-all duration-200 ${
-              isSignUp ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-950"
+              isSignUp ? "bg-surface-elevated text-slate-100 shadow-sm" : "text-slate-500 hover:text-slate-300"
             }`}
             onClick={() => {
               setIsSignUp(true);
@@ -133,12 +133,12 @@ export default function AuthScreen() {
 
         {/* Error / Success Alerts */}
         {error && (
-          <div className="mb-4 p-3 bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-md font-medium">
+          <div className="mb-4 p-3 bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs rounded-md font-medium">
             {error}
           </div>
         )}
         {successMessage && (
-          <div className="mb-4 p-3 bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs rounded-md font-medium">
+          <div className="mb-4 p-3 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs rounded-md font-medium">
             {successMessage}
           </div>
         )}
@@ -146,7 +146,7 @@ export default function AuthScreen() {
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1.5">
+            <label className="block text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1.5">
               Email Address
             </label>
             <input
@@ -155,12 +155,12 @@ export default function AuthScreen() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="name@example.com"
               required
-              className="w-full px-3.5 py-2 text-base sm:text-sm bg-slate-50 border border-slate-200 rounded-md focus:bg-white focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 transition-colors font-medium"
+              className="w-full px-3.5 py-2 text-base sm:text-sm bg-surface border border-border rounded-md focus:bg-surface-elevated focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 transition-colors font-medium text-slate-200 placeholder:text-slate-600"
             />
           </div>
 
           <div>
-            <label className="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1.5">
+            <label className="block text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1.5">
               Password
             </label>
             <input
@@ -169,14 +169,14 @@ export default function AuthScreen() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
               required
-              className="w-full px-3.5 py-2 text-base sm:text-sm bg-slate-50 border border-slate-200 rounded-md focus:bg-white focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 transition-colors font-medium"
+              className="w-full px-3.5 py-2 text-base sm:text-sm bg-surface border border-border rounded-md focus:bg-surface-elevated focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 transition-colors font-medium text-slate-200 placeholder:text-slate-600"
             />
           </div>
 
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-md text-sm font-semibold transition-all duration-200 disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer shadow-sm active:scale-[0.98]"
+            className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-md text-sm font-semibold transition-all duration-200 disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-emerald-500/20 active:scale-[0.98]"
           >
             {isLoading ? (
               <>
@@ -194,11 +194,11 @@ export default function AuthScreen() {
           </button>
         </form>
 
-        <p className="text-center text-xs text-slate-400 mt-6 font-medium">
+        <p className="text-center text-xs text-slate-500 mt-6 font-medium">
           {isSignUp ? "Already have an account?" : "New to FinanceTracker?"}{" "}
           <button
             type="button"
-            className="text-slate-900 hover:underline font-semibold"
+            className="text-emerald-400 hover:text-emerald-300 hover:underline font-semibold transition-colors"
             onClick={() => {
               setIsSignUp(!isSignUp);
               setError(null);

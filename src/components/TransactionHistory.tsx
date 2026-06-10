@@ -81,9 +81,9 @@ export default function TransactionHistory({
   };
 
   return (
-    <div className="bg-white border border-slate-200 rounded-lg p-6">
+    <div className="bg-card border border-border rounded-lg p-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-        <h2 className="text-lg font-bold text-slate-900">Transaction History</h2>
+        <h2 className="text-lg font-bold text-slate-100">Transaction History</h2>
         
         {/* Sorting controls */}
         <div className="flex items-center gap-2">
@@ -94,7 +94,7 @@ export default function TransactionHistory({
             id="sortBy"
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as 'date-desc' | 'date-asc' | 'amount-desc' | 'amount-asc')}
-            className="px-2 py-1.5 border border-slate-200 rounded-md text-xs bg-white text-slate-700 cursor-pointer"
+            className="px-2 py-1.5 border border-border rounded-md text-xs bg-surface text-slate-300 cursor-pointer"
           >
             <option value="date-desc">Newest First</option>
             <option value="date-asc">Oldest First</option>
@@ -116,7 +116,7 @@ export default function TransactionHistory({
               setSearch(e.target.value);
               setCurrentPage(1);
             }}
-            className="w-full px-3 py-2 border border-slate-200 rounded-lg text-base sm:text-sm bg-white focus:border-blue-500 transition-colors"
+            className="w-full px-3 py-2 border border-border rounded-lg text-base sm:text-sm bg-surface text-slate-200 placeholder:text-slate-600 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors"
           />
         </div>
 
@@ -125,7 +125,7 @@ export default function TransactionHistory({
           <select
             value={filterType}
             onChange={(e) => handleTypeFilterChange(e.target.value as 'all' | 'income' | 'expense')}
-            className="w-full px-3 py-2 border border-slate-200 rounded-lg text-base sm:text-sm bg-white text-slate-700 cursor-pointer"
+            className="w-full px-3 py-2 border border-border rounded-lg text-base sm:text-sm bg-surface text-slate-300 cursor-pointer"
           >
             <option value="all">All Types</option>
             <option value="income">Income Only</option>
@@ -141,7 +141,7 @@ export default function TransactionHistory({
               setFilterCategory(e.target.value);
               setCurrentPage(1);
             }}
-            className="w-full px-3 py-2 border border-slate-200 rounded-lg text-base sm:text-sm bg-white text-slate-700 cursor-pointer"
+            className="w-full px-3 py-2 border border-border rounded-lg text-base sm:text-sm bg-surface text-slate-300 cursor-pointer"
           >
             <option value="all">All Categories</option>
             {Array.from(new Set(activeCategories)).map((cat) => (
@@ -159,31 +159,31 @@ export default function TransactionHistory({
           paginatedTransactions.map((t) => (
             <div 
               key={t.id} 
-              className={`p-4 border border-slate-200 rounded-lg flex flex-col gap-3 transition-colors ${
-                editingTransactionId === t.id ? 'bg-blue-50/30 border-blue-300' : 'bg-slate-50/50'
+              className={`p-4 border rounded-lg flex flex-col gap-3 transition-colors ${
+                editingTransactionId === t.id ? 'bg-emerald-500/5 border-emerald-500/30' : 'bg-surface border-border'
               }`}
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
-                  <h4 className="font-semibold text-slate-900 text-sm truncate">{t.description}</h4>
+                  <h4 className="font-semibold text-slate-200 text-sm truncate">{t.description}</h4>
                   <div className="flex items-center gap-2 mt-1">
                     <span className="text-[10px] text-slate-500">{formatDate(t.date)}</span>
-                    <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-700 border border-slate-200">
+                    <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-surface-elevated text-slate-400 border border-border">
                       {t.category}
                     </span>
                   </div>
                 </div>
                 <span className={`text-sm font-bold whitespace-nowrap text-right shrink-0 ${
-                  t.type === 'income' ? 'text-emerald-600' : 'text-rose-600'
+                  t.type === 'income' ? 'text-emerald-400' : 'text-rose-400'
                 }`}>
                   {t.type === 'income' ? '+' : '-'}{formatCurrency(t.amount).replace(/^-/, '')}
                 </span>
               </div>
               
-              <div className="flex justify-end gap-4 border-t border-slate-200/50 pt-2">
+              <div className="flex justify-end gap-4 border-t border-border/50 pt-2">
                 <button
                   onClick={() => onEditTransaction(t)}
-                  className={`text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors cursor-pointer ${
+                  className={`text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors cursor-pointer ${
                     editingTransactionId === t.id ? 'underline' : ''
                   }`}
                 >
@@ -195,7 +195,7 @@ export default function TransactionHistory({
                       onDeleteTransaction(t.id);
                     }
                   }}
-                  className="text-xs font-semibold text-rose-600 hover:text-rose-800 transition-colors cursor-pointer"
+                  className="text-xs font-semibold text-rose-400 hover:text-rose-300 transition-colors cursor-pointer"
                 >
                   Delete
                 </button>
@@ -203,9 +203,9 @@ export default function TransactionHistory({
             </div>
           ))
         ) : (
-          <div className="py-8 text-center text-slate-400 text-xs">
+          <div className="py-8 text-center text-slate-500 text-xs">
             <div className="flex flex-col items-center justify-center gap-2">
-              <svg className="w-8 h-8 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <svg className="w-8 h-8 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
               </svg>
               <span>No transactions found.</span>
@@ -216,9 +216,9 @@ export default function TransactionHistory({
 
       {/* Desktop Tabular View (rendered on screens >= 640px) */}
       <div className="hidden sm:block overflow-x-auto">
-        <table className="w-full border-collapse text-left text-sm text-slate-700">
+        <table className="w-full border-collapse text-left text-sm text-slate-400">
           <thead>
-            <tr className="border-b border-slate-200 bg-slate-50 text-slate-500 text-xs font-semibold uppercase tracking-wider">
+            <tr className="border-b border-border bg-surface text-slate-500 text-xs font-semibold uppercase tracking-wider">
               <th className="py-3 px-4">Date</th>
               <th className="py-3 px-4">Description</th>
               <th className="py-3 px-4">Category</th>
@@ -226,28 +226,28 @@ export default function TransactionHistory({
               <th className="py-3 px-4 text-center">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100">
+          <tbody className="divide-y divide-border/50">
             {paginatedTransactions.length > 0 ? (
               paginatedTransactions.map((t) => (
                 <tr 
                   key={t.id} 
-                  className={`hover:bg-slate-50/50 transition-colors ${
-                    editingTransactionId === t.id ? 'bg-blue-50/40' : ''
+                  className={`hover:bg-surface/50 transition-colors ${
+                    editingTransactionId === t.id ? 'bg-emerald-500/5' : ''
                   }`}
                 >
-                  <td className="py-3.5 px-4 whitespace-nowrap text-slate-600">
+                  <td className="py-3.5 px-4 whitespace-nowrap text-slate-500">
                     {formatDate(t.date)}
                   </td>
-                  <td className="py-3.5 px-4 font-medium text-slate-900 break-words max-w-[200px]">
+                  <td className="py-3.5 px-4 font-medium text-slate-200 break-words max-w-[200px]">
                     {t.description}
                   </td>
                   <td className="py-3.5 px-4">
-                    <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200">
+                    <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-surface-elevated text-slate-400 border border-border">
                       {t.category}
                     </span>
                   </td>
                   <td className={`py-3.5 px-4 text-right font-semibold whitespace-nowrap ${
-                    t.type === 'income' ? 'text-emerald-600' : 'text-rose-600'
+                    t.type === 'income' ? 'text-emerald-400' : 'text-rose-400'
                   }`}>
                     {t.type === 'income' ? '+' : '-'}{formatCurrency(t.amount).replace(/^-/, '')}
                   </td>
@@ -255,7 +255,7 @@ export default function TransactionHistory({
                     <div className="inline-flex items-center gap-3">
                       <button
                         onClick={() => onEditTransaction(t)}
-                        className={`text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors cursor-pointer ${
+                        className={`text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors cursor-pointer ${
                           editingTransactionId === t.id ? 'underline' : ''
                         }`}
                       >
@@ -267,7 +267,7 @@ export default function TransactionHistory({
                             onDeleteTransaction(t.id);
                           }
                         }}
-                        className="text-xs font-semibold text-rose-600 hover:text-rose-800 transition-colors cursor-pointer"
+                        className="text-xs font-semibold text-rose-400 hover:text-rose-300 transition-colors cursor-pointer"
                       >
                         Delete
                       </button>
@@ -277,9 +277,9 @@ export default function TransactionHistory({
               ))
             ) : (
               <tr>
-                <td colSpan={5} className="py-12 text-center text-slate-400">
+                <td colSpan={5} className="py-12 text-center text-slate-500">
                   <div className="flex flex-col items-center justify-center gap-2">
-                    <svg className="w-8 h-8 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <svg className="w-8 h-8 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                     </svg>
                     <span>No transactions found.</span>
@@ -293,23 +293,23 @@ export default function TransactionHistory({
 
       {/* Pagination control panel */}
       {totalPages > 1 && (
-        <div className="flex items-center justify-between border-t border-slate-100 pt-4 mt-4 text-xs">
+        <div className="flex items-center justify-between border-t border-border/50 pt-4 mt-4 text-xs">
           <span className="text-slate-500">
-            Showing Page <span className="font-semibold text-slate-900">{currentPage}</span> of{' '}
-            <span className="font-semibold text-slate-900">{totalPages}</span>
+            Showing Page <span className="font-semibold text-slate-300">{currentPage}</span> of{' '}
+            <span className="font-semibold text-slate-300">{totalPages}</span>
           </span>
           <div className="flex gap-1">
             <button
               onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
               disabled={currentPage === 1}
-              className="px-2.5 py-1.5 border border-slate-200 rounded text-slate-600 font-semibold hover:bg-slate-50 disabled:opacity-40 disabled:hover:bg-white transition-colors cursor-pointer"
+              className="px-2.5 py-1.5 border border-border rounded text-slate-400 font-semibold hover:bg-surface-elevated hover:text-slate-200 disabled:opacity-40 disabled:hover:bg-transparent transition-colors cursor-pointer"
             >
               Prev
             </button>
             <button
               onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
               disabled={currentPage === totalPages}
-              className="px-2.5 py-1.5 border border-slate-200 rounded text-slate-600 font-semibold hover:bg-slate-50 disabled:opacity-40 disabled:hover:bg-white transition-colors cursor-pointer"
+              className="px-2.5 py-1.5 border border-border rounded text-slate-400 font-semibold hover:bg-surface-elevated hover:text-slate-200 disabled:opacity-40 disabled:hover:bg-transparent transition-colors cursor-pointer"
             >
               Next
             </button>

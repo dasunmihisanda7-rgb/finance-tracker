@@ -83,8 +83,8 @@ export default function TransactionForm({
   const categories = type === 'income' ? INCOME_CATEGORIES : EXPENSE_CATEGORIES;
 
   return (
-    <div className="bg-white border border-slate-200 p-6 rounded-lg">
-      <h2 className="text-lg font-bold text-slate-900 mb-6">
+    <div className="bg-card border border-border p-6 rounded-lg">
+      <h2 className="text-lg font-bold text-slate-100 mb-6">
         {editingTransaction ? 'Edit Transaction' : 'Add New Transaction'}
       </h2>
 
@@ -94,14 +94,14 @@ export default function TransactionForm({
           <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
             Transaction Type
           </label>
-          <div className="grid grid-cols-2 gap-2 p-1 bg-slate-50 border border-slate-200 rounded-lg">
+          <div className="grid grid-cols-2 gap-2 p-1 bg-surface border border-border rounded-lg">
             <button
               type="button"
               onClick={() => handleTypeChange('expense')}
               className={`py-2 text-sm font-medium rounded-md transition-colors cursor-pointer ${
                 type === 'expense'
-                  ? 'bg-rose-600 text-white shadow-sm'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                  ? 'bg-rose-600 text-white shadow-sm shadow-rose-500/20'
+                  : 'text-slate-400 hover:text-slate-200 hover:bg-surface-elevated'
               }`}
             >
               Expense
@@ -111,15 +111,15 @@ export default function TransactionForm({
               onClick={() => handleTypeChange('income')}
               className={`py-2 text-sm font-medium rounded-md transition-colors cursor-pointer ${
                 type === 'income'
-                  ? 'bg-emerald-600 text-white shadow-sm'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                  ? 'bg-emerald-600 text-white shadow-sm shadow-emerald-500/20'
+                  : 'text-slate-400 hover:text-slate-200 hover:bg-surface-elevated'
               }`}
             >
               Income
             </button>
           </div>
           {errors.type && (
-            <p className="text-[11px] text-rose-600 mt-1 font-medium">{errors.type}</p>
+            <p className="text-[11px] text-rose-400 mt-1 font-medium">{errors.type}</p>
           )}
         </div>
 
@@ -129,7 +129,7 @@ export default function TransactionForm({
             Amount (Rs.)
           </label>
           <div className="relative">
-            <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 text-sm font-medium">
+            <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500 text-sm font-medium">
               Rs.
             </span>
             <input
@@ -139,15 +139,15 @@ export default function TransactionForm({
               placeholder="0.00"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              className={`w-full pl-10 pr-3 py-2 border rounded-lg text-base sm:text-sm bg-white focus:outline-none focus:ring-1 transition-colors ${
+              className={`w-full pl-10 pr-3 py-2 border rounded-lg text-base sm:text-sm bg-surface focus:outline-none focus:ring-1 transition-colors text-slate-200 placeholder:text-slate-600 ${
                 errors.amount
-                  ? 'border-rose-300 focus:ring-rose-500 focus:border-rose-500'
-                  : 'border-slate-200 focus:ring-slate-900 focus:border-slate-900'
+                  ? 'border-rose-500/50 focus:ring-rose-500 focus:border-rose-500'
+                  : 'border-border focus:ring-emerald-500 focus:border-emerald-500'
               }`}
             />
           </div>
           {errors.amount && (
-            <p className="text-[11px] text-rose-600 mt-1.5 font-medium">{errors.amount}</p>
+            <p className="text-[11px] text-rose-400 mt-1.5 font-medium">{errors.amount}</p>
           )}
         </div>
 
@@ -162,14 +162,14 @@ export default function TransactionForm({
             value={date}
             suppressHydrationWarning={true}
             onChange={(e) => setDate(e.target.value)}
-            className={`w-full px-3 py-2 border rounded-lg text-base sm:text-sm bg-white focus:outline-none focus:ring-1 transition-colors ${
+            className={`w-full px-3 py-2 border rounded-lg text-base sm:text-sm bg-surface focus:outline-none focus:ring-1 transition-colors text-slate-200 ${
               errors.date
-                ? 'border-rose-300 focus:ring-rose-500 focus:border-rose-500'
-                : 'border-slate-200 focus:ring-slate-900 focus:border-slate-900'
+                ? 'border-rose-500/50 focus:ring-rose-500 focus:border-rose-500'
+                : 'border-border focus:ring-emerald-500 focus:border-emerald-500'
             }`}
           />
           {errors.date && (
-            <p className="text-[11px] text-rose-600 mt-1.5 font-medium">{errors.date}</p>
+            <p className="text-[11px] text-rose-400 mt-1.5 font-medium">{errors.date}</p>
           )}
         </div>
 
@@ -182,10 +182,10 @@ export default function TransactionForm({
             id="category"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className={`w-full px-3 py-2 border rounded-lg text-base sm:text-sm bg-white focus:outline-none focus:ring-1 transition-colors ${
+            className={`w-full px-3 py-2 border rounded-lg text-base sm:text-sm bg-surface focus:outline-none focus:ring-1 transition-colors text-slate-200 ${
               errors.category
-                ? 'border-rose-300 focus:ring-rose-500 focus:border-rose-500'
-                : 'border-slate-200 focus:ring-slate-900 focus:border-slate-900'
+                ? 'border-rose-500/50 focus:ring-rose-500 focus:border-rose-500'
+                : 'border-border focus:ring-emerald-500 focus:border-emerald-500'
             }`}
           >
             {categories.map((cat) => (
@@ -195,7 +195,7 @@ export default function TransactionForm({
             ))}
           </select>
           {errors.category && (
-            <p className="text-[11px] text-rose-600 mt-1.5 font-medium">{errors.category}</p>
+            <p className="text-[11px] text-rose-400 mt-1.5 font-medium">{errors.category}</p>
           )}
         </div>
 
@@ -210,14 +210,14 @@ export default function TransactionForm({
             placeholder="e.g., Weekly Groceries, Monthly Salary"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className={`w-full px-3 py-2 border rounded-lg text-base sm:text-sm bg-white focus:outline-none focus:ring-1 transition-colors ${
+            className={`w-full px-3 py-2 border rounded-lg text-base sm:text-sm bg-surface focus:outline-none focus:ring-1 transition-colors text-slate-200 placeholder:text-slate-600 ${
               errors.description
-                ? 'border-rose-300 focus:ring-rose-500 focus:border-rose-500'
-                : 'border-slate-200 focus:ring-slate-900 focus:border-slate-900'
+                ? 'border-rose-500/50 focus:ring-rose-500 focus:border-rose-500'
+                : 'border-border focus:ring-emerald-500 focus:border-emerald-500'
             }`}
           />
           {errors.description && (
-            <p className="text-[11px] text-rose-600 mt-1.5 font-medium">{errors.description}</p>
+            <p className="text-[11px] text-rose-400 mt-1.5 font-medium">{errors.description}</p>
           )}
         </div>
 
@@ -227,17 +227,17 @@ export default function TransactionForm({
             <button
               type="button"
               onClick={onCancelEdit}
-              className="flex-1 py-2 px-4 border border-slate-200 text-slate-700 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors cursor-pointer"
+              className="flex-1 py-2 px-4 border border-border text-slate-400 rounded-lg text-sm font-medium hover:bg-surface-elevated hover:text-slate-200 transition-colors cursor-pointer"
             >
               Cancel
             </button>
           )}
           <button
             type="submit"
-            className={`flex-1 py-2 px-4 text-white rounded-lg text-sm font-semibold transition-colors cursor-pointer ${
+            className={`flex-1 py-2 px-4 text-white rounded-lg text-sm font-semibold transition-all cursor-pointer active:scale-[0.98] ${
               type === 'expense'
-                ? 'bg-rose-600 hover:bg-rose-700'
-                : 'bg-emerald-600 hover:bg-emerald-700'
+                ? 'bg-rose-600 hover:bg-rose-500 shadow-lg shadow-rose-500/20'
+                : 'bg-emerald-600 hover:bg-emerald-500 shadow-lg shadow-emerald-500/20'
             }`}
           >
             {editingTransaction ? 'Save Changes' : 'Add Transaction'}
